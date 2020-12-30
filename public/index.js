@@ -7,7 +7,7 @@ form.addEventListener('submit', async (e) => {
     const timeStamp = formData.get('timeStamp')
     const data = { timeStamp }
 
-    const url = 'http://localhost:5000/api/timestamp'
+    const url = 'https://time-stamp-project.herokuapp.com/api/timestamp/:date'
     const config = {
         method: 'POST',
         body : JSON.stringify(data),

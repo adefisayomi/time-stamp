@@ -16,9 +16,8 @@ app.get('/', (req, res) => {
 })
 
 app.get ('/api/timestamp/:date', (req, res) => {
-  
-  if (req.body.timeStamp && (req.body.timeStamp).includes('-')) {
-    const date = new Date(req.body.timeStamp)
+  if (req.params.date && (req.params.date).includes('-')) {
+    const date = new Date(req.params.date)
     
     if (date == 'Invalid Date' || date == NaN) {
         res.json({ error: 'Invalid Date' })
@@ -28,8 +27,8 @@ app.get ('/api/timestamp/:date', (req, res) => {
     }
 }
 
-if (req.body.timeStamp && (req.body.timeStamp).includes('-') == false ) {
-    const date = new Date(parseInt(req.body.timeStamp))
+if (req.params.date && (req.params.date).includes('-') == false ) {
+    const date = new Date(parseInt(req.params.date))
     if (date == 'Invalid Date' || date == NaN) {
         res.json({ error: 'Invalid Date' })
     }
@@ -44,7 +43,7 @@ else {
 }
 })
 
-app.post('/api/timestamp', (req, res) => {
+app.post('/api/timestamp/:date', (req, res) => {
 
     if (req.body.timeStamp && (req.body.timeStamp).includes('-')) {
             const date = new Date(req.body.timeStamp)
