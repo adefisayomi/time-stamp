@@ -15,6 +15,11 @@ app.get('/', (req, res) => {
   res.sendFile('./views/index.html', {root: __dirname})
 })
 
+app.get ('/api/timestamp', (req, res) => {
+  const defaultDate = new Date()
+  res.json({ unix: defaultDate.valueOf(), utc: defaultDate.toUTCString() }) 
+})
+
 app.get ('/api/timestamp/:date', (req, res) => {
   
   if (req.params.date && (req.params.date).includes('-')) {
@@ -38,7 +43,7 @@ if (req.params.date && (req.params.date).includes('-') == false ) {
     }
 }
 
-if (req.params.date == '') {
+else {
  const defaultDate = new Date()
  res.json({ unix: defaultDate.valueOf(), utc: defaultDate.toUTCString() }) 
 }
