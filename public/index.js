@@ -5,21 +5,26 @@ form.addEventListener('submit', async (e) => {
     e.preventDefault()
     const formData = new FormData(form)
     const timeStamp = formData.get('timeStamp')
-    const data = { timeStamp }
+    let date = { timeStamp }
 
     const url = 'https://time-stamp-project.herokuapp.com/api/timestamp/:date'
     const config = {
         method: 'POST',
-        body : JSON.stringify(data),
+        body : JSON.stringify(date),
         headers : {
             'Content-Type': 'application/json',
 
         }
     }
     const res = await fetch(url, config)
-    const rep = await res.json()
-    console.log(rep)
-    output.innerText = JSON.stringify(rep)
+    const data = await res.json()
+    if (data) {
+        formData.delete('timeStamp')
+        output.innerText = JSON.stringify(data)
+    }else {
+        return 
+    }
+    
     
 })
 
