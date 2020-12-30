@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time-stamp microservice</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>
+                Timestamp Microservice
+            </h1>
+        </header>
+        <div class="main">
+          <ul>
+            <li><a href="">[project url]/api/timestamp/2015-12-25</a></li>
+            <li><a href="">[project url]/api/1451001600000</a></li>
+          </ul>
+            <h3>Enter TimeStamp Below:</h3>
+            <form id="form">
+                <span>
+                    <input type="text" name="timeStamp" value id="timeStamp" placeholder="Enter date...">
+                <button id= 'btn' type="submit">send</button>
+                </span>
+                
+            </form>
+            <h3>Output:</h3>
+            <p>
+              <code id= 'output'>{"unix":1451001600000, "utc":"Fri, 25 Dec 2015 00:00:00 GMT"}</code>
+            </p>
+            <p>
+                By <a href="https://www.devbyclace.org/" target="_blanc">Developed by clace</a>
+              </p>
+          </div>
+    </div>
+    <script src="index.js"></script>
+</body>
+</html>
