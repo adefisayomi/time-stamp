@@ -21,33 +21,22 @@ app.get ('/api/timestamp', (req, res) => {
 })
 
 app.get ('/api/timestamp/:date', (req, res) => {
-  
-  if (req.params.date && (req.params.date).includes('-') || (req.params.date).includes('/') || (req.params.date).includes(',')) {
-    const date_string = (req.params.date).replace(/[,/-]/g, '-')
-    const date = new Date(date_string)
-    
-    if (date == 'Invalid Date' || date == NaN) {
-        res.json({ error: 'Invalid Date' })
-    }
-    else {
-        res.json({ unix: date.valueOf(), utc: date.toUTCString() })
-    }
-}
 
-if (req.params.date && (req.params.date).includes('-') == false || (req.params.date).includes('/') == false ) {
-    const date = new Date(parseInt(req.params.date))
-    if (date == 'Invalid Date' || date == NaN) {
-        res.json({ error: 'Invalid Date' })
-    }
-    else {
-        res.json({ unix: date.valueOf(), utc: date.toUTCString() })
-    }
-}
+  const date_string = req.params.date
 
-else {
- const defaultDate = new Date()
- res.json({ unix: defaultDate.valueOf(), utc: defaultDate.toUTCString() }) 
-}
+  const date_number = parseInt(req.params.date)
+
+  if (date_string != '' || date_number != NaN) {
+    const date = date_string ? new Date(date_string) : new Date(date_string)
+    if (date == 'Invalid Date' || date == NaN ){
+      res.json({ error: 'Invalid Date' })
+    }
+      res.json({ unix: date.valueOf(), utc: date.toUTCString() })
+  }
+  if (date_string == '' && date_number == NaN) {
+    const defaultDate = new Date()
+     res.json({ unix: defaultDate.valueOf(), utc: defaultDate.toUTCString() }) 
+  }
 })
 
 // app.post('/api/timestamp/:date', (req, res) => {
