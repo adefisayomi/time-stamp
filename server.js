@@ -23,11 +23,23 @@ app.get ('/api/timestamp', (req, res) => {
 app.get ('/api/timestamp/:date', (req, res) => {
 
   const date_string = req.params.date
+  const isString = Array.from(req.params.date)
 
   if (date_string) {
-    const date = parseInt(date_string) === NaN ? new Date(date_string) : new Date(parseInt(date_string))
-    if (date == 'Invalid Date' || date == NaN ){
-      res.json({ error: 'Invalid Date' })
+    
+    if (isString.includes('/') || isString.includes('-') || isString.includes(',') || isString.includes(' ')){
+      const date = new Date(date_string)
+      if (date == 'Invalid Date' || date == NaN ){
+        res.json({ error: 'Invalid Date' })
+      }
+        res.json({ unix: date.valueOf(), utc: date.toUTCString() })
+    }
+    else {
+      const date = new Date(parseInt(date_string))
+      if (date == 'Invalid Date' || date == NaN ){
+        res.json({ error: 'Invalid Date' })
+      }
+        res.json({ unix: date.valueOf(), utc: date.toUTCString() })
     }
       res.json({ unix: date.valueOf(), utc: date.toUTCString() })
   }
