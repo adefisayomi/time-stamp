@@ -24,16 +24,14 @@ app.get ('/api/timestamp/:date', (req, res) => {
 
   const date_string = req.params.date
 
-  const date_number = parseInt(req.params.date)
-
-  if (date_string != '' || date_number != NaN) {
-    const date = date_string ? new Date(date_string) : new Date(date_string)
+  if (date_string) {
+    const date = parseInt(date_string) === NaN ? new Date(date_string) : new Date(parseInt(date_string))
     if (date == 'Invalid Date' || date == NaN ){
       res.json({ error: 'Invalid Date' })
     }
       res.json({ unix: date.valueOf(), utc: date.toUTCString() })
   }
-  if (date_string == '' && date_number == NaN) {
+  else{
     const defaultDate = new Date()
      res.json({ unix: defaultDate.valueOf(), utc: defaultDate.toUTCString() }) 
   }
