@@ -16,6 +16,7 @@ app.get('/', (req, res) => {
 })
 
 app.get ('/api/timestamp/:date', (req, res) => {
+  
   if (req.params.date && (req.params.date).includes('-')) {
     const date = new Date(req.params.date)
     
@@ -37,7 +38,7 @@ if (req.params.date && (req.params.date).includes('-') == false ) {
     }
 }
 
-else {
+if (req.params.date == '') {
  const defaultDate = new Date()
  res.json({ unix: defaultDate.valueOf(), utc: defaultDate.toUTCString() }) 
 }
